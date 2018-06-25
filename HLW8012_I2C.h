@@ -26,18 +26,18 @@
 #define SLAVE_ADDRESS                  0x04
 #define MAX_SENT_BYTES                 5
 #define CMD_VERSION                    0x00   // Out:4B
-#define CMD_GET_POWER                  0x10   // Out:4B, UNIT: 0.1W
-#define CMD_GET_VOLTAGE                0x11   // Out:4B, UNIT: 0.01V
-#define CMD_GET_CURRENT                0x12   // Out:4B, UNIT: 0.01A
-#define CMD_GET_POWER_MULTIPLIER       0x13   // Out:4B, UINT: 1000x
-#define CMD_GET_VOLTAGE_MULTIPLIER     0x14   // Out:4B, UNIT: 1000x
-#define CMD_GET_CURRENT_MULTIPLIER     0x15   // Out:4B, UNIT: 1000x
-#define CMD_SET_VOLTAGE_UPSTREAM_REG   0x20   // In :2B, UNIT: 0.1KOhm 
-#define CMD_SET_VOLTAGE_DOWNSTREAM_REG 0x21   // In :2B, UNIT: 0.1KOhm
-#define CMD_SET_CURRENT_REG            0x22   // In :2B, UNIT: 1.0mOhm
-#define CMD_SET_PULSE_TIMEOUT          0x23   // In :2B, UNIT: 1ms
-#define CMD_UPDATE_REGISTERS           0x30
-#define CMD_PERFORM_MEASUREMENT        0x31
+#define CMD_GET_POWER                  0x01   // Out:4B, UNIT: uW
+#define CMD_GET_VOLTAGE                0x02   // Out:4B, UNIT: uV
+#define CMD_GET_CURRENT                0x03   // Out:4B, UNIT: uA
+#define CMD_GET_POWER_MULTIPLIER       0x04   // Out:4B, UINT: 1000x
+#define CMD_GET_VOLTAGE_MULTIPLIER     0x05   // Out:4B, UNIT: 1000x
+#define CMD_GET_CURRENT_MULTIPLIER     0x06   // Out:4B, UNIT: 1000x
+#define CMD_SET_VOLTAGE_UPSTREAM_REG   0x10   // In :2B, UNIT: 0.1KOhm 
+#define CMD_SET_VOLTAGE_DOWNSTREAM_REG 0x11   // In :2B, UNIT: 0.1KOhm
+#define CMD_SET_CURRENT_REG            0x12   // In :2B, UNIT: 1.0mOhm
+#define CMD_SET_PULSE_TIMEOUT          0x13   // In :2B, UNIT: 1ms
+#define CMD_UPDATE_REGISTERS           0x20
+#define CMD_PERFORM_MEASUREMENT        0x21
 
 
 class HLW8012_I2C
