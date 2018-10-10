@@ -29,6 +29,39 @@ bool HLW8012_I2C::exist()
     return _exist;
 }
 
+void HLW8012_I2C::SetRegisters(double voltage_up, double voltage_down, double current)
+{
+	uint16_t v_up   = (uint16_t)(voltage_up / 100.0);
+	uint16_t v_down = (uint16_t)(voltage_down / 100.0);
+	uint16_t c      = (uint16_t)(current * 1000.0);
+	
+	write16(CMD_SET_VOLTAGE_UPSTREAM_REG, v_up);
+	write16(CMD_SET_VOLTAGE_DOWNSTREAM_REG, v_down);
+	write16(CMD_SET_CURRENT_REG, c);
+	write0(CMD_UPDATE_REGISTERS);
+}
+
+void HLW8012_I2C::CalibrateVoltage(double expect_value)
+{
+	uint16_t value = (uint16_t)(expect_value * 100.0);
+	write16(CMD_SET_EXPECT_VOLTAGE, value);
+	write0(CMD_CALIBRATE_VOLTAGE);
+}	
+
+void HLW8012_I2C::CalibrateCurrent(double expect_value)
+{
+	uint16_t value = (uint16_t)(expect_value * 1000.0);
+	write16(CMD_CALIBRATE_CURRENT, value);
+	write0(CMD_CALIBRATE_VOLTAGE);
+}	
+
+void HLW8012_I2C::CalibratePower(double expect_value)
+{
+	uint16_t value = (uint16_t)(expect_value * 100.0);
+	write16(CMD_SET_EXPECT_VOLTAGE, value);
+	write0(CMD_CALIBRATE_POWER);
+}		
+
 uint32_t HLW8012_I2C::read32(uint8_t reg)
 {
 		uint32_t value = 0;

@@ -35,10 +35,14 @@
 #define CMD_SET_VOLTAGE_UPSTREAM_REG   0x10   // In :2B, UNIT: 0.1KOhm 
 #define CMD_SET_VOLTAGE_DOWNSTREAM_REG 0x11   // In :2B, UNIT: 0.1KOhm
 #define CMD_SET_CURRENT_REG            0x12   // In :2B, UNIT: 1.0mOhm
-#define CMD_SET_PULSE_TIMEOUT          0x13   // In :2B, UNIT: 1ms
+#define CMD_SET_EXPECT_VOLTAGE         0x13   // In :2B, UNIT: 0.01 V
+#define CMD_SET_EXPECT_CURRENT         0x14   // In :2B, UNIT: 0.001 A
+#define CMD_SET_EXPECT_POWER           0x15   // In :2B, UNIT: 0.01 W
 #define CMD_UPDATE_REGISTERS           0x20
 #define CMD_PERFORM_MEASUREMENT        0x21
-
+#define CMD_CALIBRATE_VOLTAGE          0x22
+#define CMD_CALIBRATE_CURRENT          0x23
+#define CMD_CALIBRATE_POWER            0x24
 
 class HLW8012_I2C
 {
@@ -54,7 +58,12 @@ class HLW8012_I2C
     uint32_t Power()     { return read32(CMD_GET_POWER); }
     uint32_t Voltage()   { return read32(CMD_GET_VOLTAGE); }
     uint32_t Current()   { return read32(CMD_GET_CURRENT); }
-    uint32_t Measure()  { write0(CMD_PERFORM_MEASUREMENT); }
+    void     Measure()   { write0(CMD_PERFORM_MEASUREMENT); }
+
+    void     SetRegisters(double voltage_up, double voltage_down, double current);
+    void     CalibrateVoltage(double expect_value);
+    void     CalibrateCurrent(double expect_value);
+    void     CalibratePower(double expect_value);
 
   private:
     void     write0(uint8_t reg);
