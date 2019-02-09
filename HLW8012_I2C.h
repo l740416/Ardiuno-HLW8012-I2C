@@ -32,6 +32,9 @@
 #define CMD_GET_POWER_MULTIPLIER       0x04   // Out:4B, UINT: 1000x
 #define CMD_GET_VOLTAGE_MULTIPLIER     0x05   // Out:4B, UNIT: 1000x
 #define CMD_GET_CURRENT_MULTIPLIER     0x06   // Out:4B, UNIT: 1000x
+#define CMD_GET_POWER_PULSEWIDTH       0x07   // Out:4B, UNIT: us
+#define CMD_GET_VOLTAGE_PULSEWIDTH     0x08   // Out:4B, UNIT: us
+#define CMD_GET_CURRENT_PULSEWIDTH     0x09   // Out:4B, UNIT: us
 #define CMD_SET_VOLTAGE_UPSTREAM_REG   0x10   // In :2B, UNIT: 0.1KOhm 
 #define CMD_SET_VOLTAGE_DOWNSTREAM_REG 0x11   // In :2B, UNIT: 0.1KOhm
 #define CMD_SET_CURRENT_REG            0x12   // In :2B, UNIT: 1.0mOhm
@@ -58,6 +61,15 @@ class HLW8012_I2C
     uint32_t Power()     { return read32(CMD_GET_POWER); }
     uint32_t Voltage()   { return read32(CMD_GET_VOLTAGE); }
     uint32_t Current()   { return read32(CMD_GET_CURRENT); }
+    
+    uint32_t PowerMultiplier()     { return read32(CMD_GET_POWER_MULTIPLIER); }
+    uint32_t VoltageMultiplier()   { return read32(CMD_GET_VOLTAGE_MULTIPLIER); }
+    uint32_t CurrentMultiplier()   { return read32(CMD_GET_CURRENT_MULTIPLIER); }
+    
+    uint32_t PowerPulseWidth()     { return read32(CMD_GET_POWER_PULSEWIDTH); }
+    uint32_t VoltagePulseWidth()   { return read32(CMD_GET_VOLTAGE_PULSEWIDTH); }
+    uint32_t CurrentPulseWidth()   { return read32(CMD_GET_CURRENT_PULSEWIDTH); }
+    
     void     Measure()   { write0(CMD_PERFORM_MEASUREMENT); }
 
     void     SetRegisters(double voltage_up, double voltage_down, double current);
